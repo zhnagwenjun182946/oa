@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wen.oa.dao.ClaimVoucherMapper" >
+  <resultMap id="BaseResultMap" type="cn.wen.oa.entity.ClaimVoucher" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cause" property="cause" jdbcType="VARCHAR" />
+    <result column="create_sn" property="createSn" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="next_deal_sn" property="nextDealSn" jdbcType="CHAR" />
+    <result column="total_amount" property="totalAmount" jdbcType="DOUBLE" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cause, create_sn, create_time, next_deal_sn, total_amount, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.wen.oa.entity.ClaimVoucherExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from claim_voucher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from claim_voucher
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from claim_voucher
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.wen.oa.entity.ClaimVoucherExample" >
+    delete from claim_voucher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.wen.oa.entity.ClaimVoucher" >
+    insert into claim_voucher (id, cause, create_sn, 
+      create_time, next_deal_sn, total_amount, 
+      status)
+    values (#{id,jdbcType=INTEGER}, #{cause,jdbcType=VARCHAR}, #{createSn,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{nextDealSn,jdbcType=CHAR}, #{totalAmount,jdbcType=DOUBLE}, 
+      #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.wen.oa.entity.ClaimVoucher" >
+    insert into claim_voucher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cause != null" >
+        cause,
+      </if>
+      <if test="createSn != null" >
+        create_sn,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="nextDealSn != null" >
+        next_deal_sn,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cause != null" >
+        #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="createSn != null" >
+        #{createSn,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextDealSn != null" >
+        #{nextDealSn,jdbcType=CHAR},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.wen.oa.entity.ClaimVoucherExample" resultType="java.lang.Integer" >
+    select count(*) from claim_voucher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update claim_voucher
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cause != null" >
+        cause = #{record.cause,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createSn != null" >
+        create_sn = #{record.createSn,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.nextDealSn != null" >
+        next_deal_sn = #{record.nextDealSn,jdbcType=CHAR},
+      </if>
+      <if test="record.totalAmount != null" >
+        total_amount = #{record.totalAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update claim_voucher
+    set id = #{record.id,jdbcType=INTEGER},
+      cause = #{record.cause,jdbcType=VARCHAR},
+      create_sn = #{record.createSn,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      next_deal_sn = #{record.nextDealSn,jdbcType=CHAR},
+      total_amount = #{record.totalAmount,jdbcType=DOUBLE},
+      status = #{record.status,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wen.oa.entity.ClaimVoucher" >
+    update claim_voucher
+    <set >
+      <if test="cause != null" >
+        cause = #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="createSn != null" >
+        create_sn = #{createSn,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextDealSn != null" >
+        next_deal_sn = #{nextDealSn,jdbcType=CHAR},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.wen.oa.entity.ClaimVoucher" >
+    update claim_voucher
+    set cause = #{cause,jdbcType=VARCHAR},
+      create_sn = #{createSn,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      next_deal_sn = #{nextDealSn,jdbcType=CHAR},
+      total_amount = #{totalAmount,jdbcType=DOUBLE},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
